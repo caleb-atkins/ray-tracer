@@ -1,6 +1,8 @@
-/*
-obj.h - defines OBJ_T that holds sphere information
-*/
+/********************************************************
+=========================================================
+obj.h - defines OBJ_T linked list struct for holding sphere data
+=========================================================
+********************************************************/
 
 #include "vec.h"
 #include "sphere.h"
@@ -8,7 +10,7 @@ obj.h - defines OBJ_T that holds sphere information
 #ifndef OBJ_H
 #define OBJ_H
 
-// struct to hold sphere data, color data, and next sphere to render
+// linked list to hold sphere data, color data, and next sphere to render
 typedef struct OBJ_T {
   SPHERE_T sphere;
   COLOR_T color;

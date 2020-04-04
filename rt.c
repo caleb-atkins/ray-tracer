@@ -1,13 +1,12 @@
-/*
-
+/*************************************************************************************************************************
+==========================================================================================================================
 Caleb Atkins
-CSCI 304
-
 Ray-tracing program
-Input: text file containing sphere information OR manual text input via command line interface
-Output: .ppm image file of spheres
 
-*/
+Input: spatial positions, sizes, and colors of spheres through standard input (text file or manual input via command line)
+Output: .ppm 3D image file of colored spheres under lighting
+==========================================================================================================================
+*************************************************************************************************************************/
 
 #include "rt.h"
 #include "vec.h"
@@ -19,7 +18,11 @@ Output: .ppm image file of spheres
 #include "stdio.h"
 #include "math.h"
 
-// reads spheres from stdin; creates linked list using dynamic memory
+/**
+  * @desc reads spheres from stdin; creates dynamic linked list
+  *
+  * @param OBJ_T **list - double pointer to initialized linked list to hold sphere objects
+**/
 void read_objs(OBJ_T **list) {
 
   // initialize sphere variables and list
@@ -47,7 +50,15 @@ void read_objs(OBJ_T **list) {
   }
 }
 
-// send ray caster to interpet color for display
+/**
+  * @desc send ray caster to interpet color for display
+  *
+  * @param RAY_T ray - current ray tracing projection to target pixel
+  * @param OBJ_T *list - pointer to linked list of sphere objects
+  * @param LIGHT_T light - fixed position of light source
+  *
+  * @return COLOR_T object indicating the final color for current pixel
+**/
 COLOR_T trace(RAY_T ray, OBJ_T *list, LIGHT_T light) {
 
   // accept the shortest distance to see which sphere is in the front
@@ -90,9 +101,11 @@ COLOR_T trace(RAY_T ray, OBJ_T *list, LIGHT_T light) {
 }
 
 /*
-read in spheres from either piped-in text file or manual user input into a dynamic memory linked list
--> free up memory at end of program
-*/
+ * read in spheres from piped-in text file OR manual command line input into linked list
+ * initialize PPM file
+ * traverse 1000 x 1000 pixel frame, determining illuminated color for each pixel
+ * clear memory when image file is complete
+ */
 int main() {
   int x_pixel, y_pixel;
 
@@ -108,7 +121,8 @@ int main() {
   printf("255\n");
 
   // traverse 1000x1000 pixel frame, pixel by pixel, ray tracing onto image space and applying colors/shades to spheres
-  // note: min_color in trace() refers to color before applying lighting, max_color refers to the max value allowed for sphere color input
+  // note: min_color in trace() refers to color before applying lighting,
+  //   max_color refers to the max value allowed for sphere color input
   double z = 1;
   for (y_pixel = 0; y_pixel < 1000; y_pixel++) {
     for (x_pixel = 0; x_pixel < 1000; x_pixel++) {

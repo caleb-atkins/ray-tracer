@@ -1,16 +1,27 @@
-/*
+/********************************************************************************************************
+=========================================================================================================
 light.c - provides lighting for 3D representation after computing ambient, diffuse, and specular lighting
-*/
+=========================================================================================================
+********************************************************************************************************/
 
 #include "math.h"
 #include "light.h"
 #include "vec.h"
 
-/*
-computes ambient, diffuse, and specular lighting
-returns final color
-*/
+/**
+  * @desc apply lighting to pixel base color, as determined by ray tracer
+  *
+  * @param RAY_T ray - current ray tracing projection to target pixel
+  * @param LIGHT_T light - fixed position of light source
+  * @param OBJ_T *list - pointer to linked list of sphere objects
+  * @param COLOR_T surface_color - base color of pixel prior to applying lighting
+  * @param VEC_T int_pt - intersection point of current view ray with closest sphere object
+  * @param VEC_T normal - normalized ray for vector calculations
+  *
+  * @return COLOR_T finished_color - color of pixel after applying lighting to base color
+**/
 COLOR_T illuminate (RAY_T ray, LIGHT_T light, OBJ_T *list, COLOR_T surface_color, VEC_T int_pt, VEC_T normal){
+
   //copy surface_color to return
   COLOR_T finished_color = surface_color;
 

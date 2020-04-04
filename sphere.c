@@ -1,15 +1,23 @@
-/*
+/******************************************************************************************************
+=======================================================================================================
 sphere.c - provides intersect_sphere function to detect ray tracer intersection with sphere in 3D space
-*/
+=======================================================================================================
+******************************************************************************************************/
 
 #include "math.h"
 #include "sphere.h"
 
-/*
-computes intersection of projected ray and sphere;
-returns 1 if intersection, 0 otherwise;
-t is set to distance from camera to sphere intersection
-*/
+/**
+  * @desc calculates and assigns *t = distance from camera to sphere intersection given current tracing ray
+  *
+  * @param RAY_T ray - current ray tracing projection to target pixel
+  * @param SPHERE_T sphere - sphere object under consideration
+  * @param double *t - becomes calculated distance from camera to sphere intersection
+  * @param VEC_T *int_pt - pointer to intersection point of current view ray with closest sphere object
+  * @param VEC_T *normal - pointer to normalized ray for vector calculations
+  *
+  * @return 1 if intersection is detected, 0 otherwise
+**/
 int intersect_sphere(RAY_T ray, SPHERE_T sphere, double *t, VEC_T *int_pt, VEC_T *normal) {
   VEC_T direction = ray.direction;
   VEC_T origin = ray.origin;
